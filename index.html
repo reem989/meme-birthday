@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 21st Birthday Meme! 🎀</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --baby-pink: #fde2e4;
+      --soft-lavender: #e2e2f5;
+      --off-white: #fffaff;
+      --accent-pink: #ffb7b2;
+      --text-color: #5c4b51;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--off-white);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Falling Animations Element */
+    .sparkle {
+      position: fixed;
+      top: -10px;
+      z-index: 999;
+      user-select: none;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(360deg);
+      }
+    }
+
+    /* Main Sections Container */
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    /* Section 1: Hero Cover */
+    #hero {
+      background: linear-gradient(135deg, var(--baby-pink), var(--soft-lavender));
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #d47a85;
+      margin-bottom: 10px;
+    }
+
+    .sub-text {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.8;
+    }
+
+    .btn {
+      background-color: #ffffff;
+      color: #d47a85;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid var(--accent-pink);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background-color: var(--baby-pink);
+    }
+
+    /* Section 2: Once upon a time */
+    .handwritten {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      color: #b56576;
+    }
+
+    .polaroid-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 15px 15px 25px 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transform: rotate(-3deg);
+      transition: transform 0.3s ease;
+      max-width: 250px;
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(3deg);
+    }
+
+    .polaroid:hover {
+      transform: scale(1.05) rotate(0deg);
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .polaroid-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      margin-top: 10px;
+      color: #6c584c;
+    }
+
+    /* Section 3: Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 500px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .timeline-item {
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      border-left: 4px solid var(--accent-pink);
+      text-align: left;
+    }
+
+    .timeline-item h4 {
+      color: #b56576;
+    }
+
+    /* Section 4: Main Message */
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 35px 25px;
+      border-radius: 20px;
+      max-width: 650px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      line-height: 1.8;
+      border: 1px solid var(--baby-pink);
+      margin-top: 20px;
+    }
+
+    /* Music Player Floating Bar */
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      padding: 10px 18px;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    audio {
+      display: none;
+    }
+
+    .music-btn {
+      background: var(--accent-pink);
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Music Player -->
+  <div class="music-player">
+    <span>🎵 Meme's Song</span>
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">Play ▶</button>
+    <audio id="bgMusic" loop>
+      <!-- يمكنك تغيير الرابط بالأسفل برابط أي اغنية صوتیة تريدينها -->
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    </audio>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="hero">
+    <h1>Happy 21st Birthday Meme 🎀</h1>
+    <p class="sub-text">A little website for a very special girl ♡</p>
+    <a href="#section2" class="btn">open your little surprise →</a>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="section2">
+    <p class="handwritten">once upon a time… 🧸</p>
+    <p style="margin-top: 10px; max-width: 450px;">
+      Before she became the Meme we know today… <br>
+      there was just a little girl with the biggest smile ♡
+    </p>
+
+    <div class="polaroid-container">
+      <div class="polaroid">
+        <img src="IMG_9795.jpeg" alt="Baby Meme">
+        <div class="polaroid-caption">look at baby Meme 🥹🎀</div>
+      </div>
+      <div class="polaroid">
+        <img src="IMG_9796.jpeg" alt="Meme Picture">
+        <div class="polaroid-caption">sweetest smile ♡</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="section3" style="background-color: var(--soft-lavender);">
+    <h2>21 years of Meme 🎂</h2>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>little Meme 🎀</h4>
+        <p>The cutest little star with full of energy & sweetness.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>growing up 🌷</h4>
+        <p>Learning, making memories, and brightening up everywhere she goes.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>teenage Meme 🦋</h4>
+        <p>Fun, adventurous, and making unforgettable friends.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>21 ♡</h4>
+        <p>The beautiful, kind, and amazing girl you are today!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="section4">
+    <h2 class="handwritten" style="font-size: 2.5rem;">To My Dearest Meme 🤍</h2>
+    
+    <div class="card">
+      <p>Happy 21st birthday to one of the sweetest people I’ve ever had the chance to know 🤍</p> <br>
+      <p>I honestly don’t know how 21 years went by so quickly but looking at your little pictures makes me smile so much because that tiny girl had no idea how many beautiful memories she was going to make and how many people she was going to mean so much to.</p> <br>
+      <p>I’m so grateful that life brought you into mine and gave me someone I can laugh with talk to and make memories with. I hope this new year of your life brings you everything your heart wishes for and so much more.</p> <br>
+      <p>I hope you always stay the sweet funny beautiful person you are and never forget how loved and appreciated you are.</p> <br>
+      <p>Happy 21st Meme 🤍🎀<br>
+      Here’s to another year of memories laughs random conversations and moments we’ll remember forever.</p> <br>
+      <p style="font-weight: 600; color: #b56576;">I love you so much and I’m so lucky to call you my friend. ♡</p>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="section5" style="background: linear-gradient(135deg, var(--soft-lavender), var(--baby-pink));">
+    <p class="handwritten" style="font-size: 2.5rem;">one last thing...</p>
+
+    <div class="polaroid" style="margin: 25px 0;">
+      <img src="IMG_9795.jpeg" alt="Little Meme">
+      <div class="polaroid-caption">Always the favorite ♡</div>
+    </div>
+
+    <p style="font-size: 1.1rem; font-weight: 500;">
+      No matter how old you get… <br>
+      you’ll always be someone’s little girl. 🎀
+    </p>
+
+    <h2 style="margin-top: 30px; color: #d47a85;">Happy 21st birthday Meme ♡</h2>
+    <p class="handwritten" style="font-size: 1.8rem; margin-top: 5px;">I hope you love the person you're becoming.</p>
+  </section>
+
+  <!-- JavaScript for Animations and Music -->
+  <script>
+    // Create Falling Hearts and Stars
+    function createSparkle() {
+      const items = ['✨', '💖', '🌸', '🎀', '🤍'];
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.innerText = items[Math.floor(Math.random() * items.length)];
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.animationDuration = Math.random() * 3 + 2 + 's';
+      sparkle.style.fontSize = Math.random() * 15 + 10 + 'px';
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 5000);
+    }
+    setInterval(createSparkle, 300);
+
+    // Toggle Music
+    function toggleMusic() {
+      const audio = document.getElementById('bgMusic');
+      const btn = document.getElementById('musicBtn');
+      if (audio.paused) {
+        audio.play();
+        btn.innerText = 'Pause ⏸';
+      } else {
+        audio.pause();
+        btn.innerText = 'Play ▶';
+      }
+    }
+  </script>
+</body>
+</html>
